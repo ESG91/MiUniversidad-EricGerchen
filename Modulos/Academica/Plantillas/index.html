@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .menu-container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .menu-container h1 {
+            margin-bottom: 20px;
+        }
+        .menu-container a {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .menu-container a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Menú Principal</h1>
+        <a href="{% url 'admin:index' %}">Administración</a>
+        <a href="{% url 'formularioContacto' %}">Formulario de Contacto</a>
+        <a href="{% url 'buscar_estudiantes' %}">Buscar Estudiantes</a>
+        <a href="{% url 'buscar_carreras' %}">Buscar Carreras</a>
+    </div>
+</body>
+</html>

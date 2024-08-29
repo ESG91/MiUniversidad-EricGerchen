@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda de Estudiantes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"], select {
+            padding: 10px;
+            width: calc(100% - 24px);
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        li:nth-child(odd) {
+            background-color: #efefef;
+        }
+
+        .no-results {
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='/'">Regresar al Inicio</button>
+    <div class="container">
+        <h1>Búsqueda de Estudiantes</h1>
+        <form method="get">
+            {{ form.as_p }}
+            <button type="submit">Buscar</button>
+        </form>
+
+        <h2>Resultados</h2>
+        <ul>
+            {% for estudiante in resultados %}
+                <li>{{ estudiante.nombreCompleto }}</li>
+                <li>DNI: {{ estudiante.dni }}</li>
+                <li>Sexo: {{ estudiante.get_sexo_display }}</li>
+                <li>Vigencia: {{ estudiante.get_estado_vigencia }}</li>
+                <li>Se encuentra en la carrera: {{ estudiante.carrera.nombre }}</li>
+            {% empty %}
+                <li class="no-results">No se encontraron estudiantes.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
