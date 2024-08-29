@@ -50,6 +50,6 @@ Los estudiantes pueden ser matriculados en uno o más cursos.
 Validación para evitar la matrícula duplicada de un estudiante en el mismo curso.
 ## 3. Envío de Correos Electrónicos
 La aplicación incluye funcionalidad para enviar correos electrónicos a los estudiantes, notificándoles sobre su matrícula o información relevante.
-## 1. Gestión de Carreras
+## 4. Gestión de Carreras
 Permite agregar, editar, y eliminar carreras.
 Permite buscar carreras mediante un formulario de búsqueda, con validación para asegurarse de que el criterio de búsqueda no esté vacío y que solo contenga letras.
