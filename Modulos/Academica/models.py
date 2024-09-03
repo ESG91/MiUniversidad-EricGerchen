@@ -1,7 +1,9 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+import uuid
 
 class Carrera(models.Model):
+    code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     codigo = models.CharField(max_length=3, primary_key=True)
     nombre = models.CharField(max_length=50)
     duracion = models.PositiveSmallIntegerField(default=5)
@@ -14,6 +16,7 @@ class Carrera(models.Model):
         return f"{self.nombre} (Duración: {self.duracion} año(s))"
 
 class Estudiante(models.Model):
+    code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     dni = models.PositiveIntegerField(primary_key=True)
     nombre = models.CharField(max_length=35)
     apellido = models.CharField(max_length=35)
@@ -40,6 +43,7 @@ class Estudiante(models.Model):
         return "Vigente" if self.vigencia else "De baja"
 
 class Curso(models.Model):
+    code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     codigo = models.CharField(max_length=6, primary_key=True)
     nombre = models.CharField(max_length=30)
     docente = models.CharField(max_length=100)
@@ -48,6 +52,7 @@ class Curso(models.Model):
         return f"{self.nombre} ({self.codigo}) / Docente: {self.docente}"
 
 class Matricula(models.Model):
+    code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     id = models.AutoField(primary_key=True)
     estudiante = models.ForeignKey(Estudiante, null=False, blank=False, on_delete=models.CASCADE)
     curso = models.ForeignKey(Curso, null=False, blank=False, on_delete=models.CASCADE)
