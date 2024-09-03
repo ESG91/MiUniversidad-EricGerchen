@@ -95,6 +95,15 @@
         .no-results {
             color: #777;
         }
+
+        .student-link {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .student-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -109,11 +118,11 @@
         <h2>Resultados</h2>
         <ul>
             {% for estudiante in resultados %}
-                <li>{{ estudiante.nombreCompleto }}</li>
-                <li>DNI: {{ estudiante.dni }}</li>
-                <li>Sexo: {{ estudiante.get_sexo_display }}</li>
-                <li>Vigencia: {{ estudiante.get_estado_vigencia }}</li>
-                <li>Se encuentra en la carrera: {{ estudiante.carrera.nombre }}</li>
+                <li>
+                    <a href="{% url 'detalle_estudiante' code=estudiante.code %}" class="student-link">
+                        {{ estudiante.nombre }} {{ estudiante.apellido }}
+                    </a>
+                </li>
             {% empty %}
                 <li class="no-results">No se encontraron estudiantes.</li>
             {% endfor %}

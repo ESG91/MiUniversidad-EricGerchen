@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Estudiante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 8px;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .student-detail {
+            text-align: left;
+        }
+
+        .student-detail p {
+            margin-bottom: 10px;
+        }
+
+        .student-detail label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Detalle del Estudiante</h2>
+        <div class="student-detail">
+            <p><label>Nombre:</label> {{ estudiante.nombre }}</p>
+            <p><label>Apellido:</label> {{ estudiante.apellido }}</p>
+            <p><label>DNI:</label> {{ estudiante.dni }}</p>
+            <p><label>Email:</label> {{ estudiante.email }}</p>
+            <p><label>Sexo:</label> {{ estudiante.get_sexo_display }}</p>
+            <p><label>Vigencia:</label> {{ estudiante.get_estado_vigencia }}</p>
+            <p><label>Carrera:</label> {{ estudiante.carrera.nombre }}</p>
+        </div>
+        <button class="back-button" onclick="window.history.back()">Volver a la búsqueda</button>
+    </div>
+</body>
+</html>

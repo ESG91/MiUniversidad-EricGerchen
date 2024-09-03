@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from .models import Estudiante,Carrera
 from .forms import BusquedaEstudianteForm,BusquedaCarreraForm,ContactoForm
 from django.db.models import Q
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -52,6 +53,12 @@ def buscar_estudiantes(request):
 
     return render(request, 'buscar_estudiantes.html', {'form': form, 'resultados': resultados})
 
+
+def detalle_estudiante(request, code):
+    estudiante = get_object_or_404(Estudiante, code=code)
+    return render(request, 'detalle_estudiante.html', {'estudiante': estudiante})
+
+
 def buscar_carreras(request):
     form = BusquedaCarreraForm()
     resultados = []
@@ -65,6 +72,10 @@ def buscar_carreras(request):
             )
 
     return render(request, 'buscar_carreras.html', {'form': form, 'resultados': resultados})
+
+def detalle_carrera(request, code):
+    carrera = get_object_or_404(Carrera, code=code)
+    return render(request, 'detalle_carrera.html', {'carrera': carrera})
 
 def index(request):
     return render(request, 'index.html')

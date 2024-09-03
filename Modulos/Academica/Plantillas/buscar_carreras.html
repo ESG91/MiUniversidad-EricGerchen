@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Búsqueda de Carreras</title>
     <style>
-        body {
+                body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -15,6 +15,7 @@
             align-items: center;
             flex-direction: column;
             min-height: 100vh;
+            position: relative;
         }
 
         .container {
@@ -52,7 +53,7 @@
             margin-bottom: 20px;
         }
 
-        input[type="text"] {
+        input[type="text"], select {
             padding: 10px;
             width: calc(100% - 24px);
             margin-bottom: 10px;
@@ -67,6 +68,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin: 5px;
         }
 
         button:hover {
@@ -93,6 +95,15 @@
         .no-results {
             color: #777;
         }
+
+        .student-link {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .student-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -106,8 +117,12 @@
 
         <h2>Resultados</h2>
         <ul>
-            {% for carreras in resultados %}
-            <li>{{ carreras.nombre }} - Duración de la carrera: {{ carreras.duracion }} año(s)</li>
+            {% for carrera in resultados %}
+            <li>
+                <a href="{% url 'detalle_carrera' code=carrera.code %}" class="career-link">
+                    {{ carrera.nombre }}
+                </a>
+            </li>
             {% empty %}
                 <li class="no-results">No se encontraron Carreras.</li>
             {% endfor %}
