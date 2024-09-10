@@ -1,5 +1,7 @@
 ## Autor
 Eric Gerchen
+## Comisión
+Comisión 57830
 
 ## Proyecto de Administración de Universidad
 Este proyecto es una aplicación web desarrollada con Django, diseñada para administrar una universidad. La aplicación permite gestionar información relacionada con carreras, estudiantes, cursos, y matrículas. Además, incluye funcionalidad para enviar correos electrónicos a los estudiantes.

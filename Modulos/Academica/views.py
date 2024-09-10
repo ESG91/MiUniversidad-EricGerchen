@@ -79,3 +79,7 @@ def detalle_carrera(request, code):
 
 def index(request):
     return render(request, 'index.html')
+
+def about_me(request):
+    return render(request, 'aboutMe.html')
+
