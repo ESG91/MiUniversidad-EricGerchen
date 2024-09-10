@@ -16,16 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Modulos.Academica.views import formularioContacto,contactar,buscar_estudiantes,buscar_carreras,index,detalle_estudiante,detalle_carrera,about_me
+from Modulos.Academica import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',index, name='index'),  # Ruta para la página de inicio
-    path('formularioContacto/',formularioContacto,name='formularioContacto'),
-    path('contactar/',contactar),
-    path('buscarEstudiantes/',buscar_estudiantes, name='buscar_estudiantes'),
-    path('detalleEstudiante/<uuid:code>/',detalle_estudiante, name='detalle_estudiante'),
-    path('buscarCarreras/',buscar_carreras, name='buscar_carreras'),
-    path('detalleCarrera/<uuid:code>/',detalle_carrera, name='detalle_carrera'),
-    path('about/',about_me, name='aboutMe'),
+    path('',views.index, name='index'),  # Ruta para la página de inicio
+    path('formularioContacto/',views.formularioContacto,name='formularioContacto'),
+    path('contactar/',views.contactar),
+    path('estudiantes/',views.EstudianteListView.as_view(), name='estudiante_list'),
+    path('estudiantes/create/',views.EstudianteCreateView.as_view(), name='estudiante_create'),
+    path('estudiantes/<uuid:code>/',views.EstudianteDetailView.as_view(), name='estudiante_detail'),
+    path('estudiantes/<uuid:pk>/update/', views.EstudianteUpdateView.as_view(), name='actualizar_estudiante'),
+    path('estudiantes/<uuid:code>/delete/',views.EstudianteDeleteView.as_view(), name='estudiante_delete'),
+    path('buscarEstudiantes/',views.buscar_estudiantes, name='buscar_estudiantes'),
+    path('detalleEstudiante/<uuid:code>/',views.detalle_estudiante, name='detalle_estudiante'),
+    path('buscarCarreras/',views.buscar_carreras, name='buscar_carreras'),
+    path('detalleCarrera/<uuid:code>/',views.detalle_carrera, name='detalle_carrera'),
+    path('about/',views.about_me, name='aboutMe'),
 ]

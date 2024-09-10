@@ -69,3 +69,6 @@ class Matricula(models.Model):
                 letraSexo = "o"
         fecMat = self.fechaMatricula.strftime("%A %d/%m/%Y %H:%M:%S")
         return f"{self.estudiante.nombreCompleto()} matriculad{letraSexo} en el curso {self.curso} / Fecha: {fecMat}"
+      
+
+

@@ -5,6 +5,8 @@ from .models import Estudiante,Carrera
 from .forms import BusquedaEstudianteForm,BusquedaCarreraForm,ContactoForm
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 # Create your views here.
 
@@ -82,4 +84,43 @@ def index(request):
 
 def about_me(request):
     return render(request, 'aboutMe.html')
+
+class EstudianteCreateView(CreateView):
+    model = Estudiante
+    fields = ['dni', 'nombre', 'apellido', 'fechaNacimiento', 'sexo', 'carrera', 'vigencia']
+    template_name = 'estudiantes/estudiante_form.html'
+    success_url = reverse_lazy('estudiante_list')
+
+class EstudianteListView(ListView):
+    model = Estudiante
+    template_name = 'estudiantes/estudiante_list.html'
+    context_object_name = 'estudiantes'
+
+class EstudianteUpdateView(UpdateView):
+    model = Estudiante
+    fields = ['nombre', 'apellido', 'fechaNacimiento','sexo', 'carrera', 'vigencia']
+    template_name = 'estudiantes/estudiante_form.html'
+    success_url = '/estudiantes/'
+
+    def get_object(self, queryset=None):
+        # Obtener el UUID del parámetro 'pk'
+        code = self.kwargs.get('pk')
+        try:
+            return Estudiante.objects.get(code=code)
+        except Estudiante.DoesNotExist:
+            raise Http404("Estudiante no encontrado")
+
+class EstudianteDeleteView(DeleteView):
+    model = Estudiante
+    template_name = 'estudiantes/estudiante_confirm_delete.html'
+    success_url = reverse_lazy('estudiante_list')  
+
+class EstudianteDetailView(DetailView):
+    model = Estudiante
+    template_name = 'estudiantes/estudiante_detail.html'
+    context_object_name = 'estudiante'
+    
+    def get_object(self):
+        code = self.kwargs.get('code')
+        return get_object_or_404(Estudiante, code=code) 
 
