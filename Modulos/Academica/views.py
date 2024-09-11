@@ -113,7 +113,13 @@ class EstudianteUpdateView(UpdateView):
 class EstudianteDeleteView(DeleteView):
     model = Estudiante
     template_name = 'estudiantes/estudiante_confirm_delete.html'
-    success_url = reverse_lazy('estudiante_list')  
+    success_url = reverse_lazy('estudiante_list')
+
+    def get_object(self, queryset=None):
+        # Obtén el 'code' de los argumentos de la URL
+        code = self.kwargs.get('code')
+        # Busca el estudiante con el 'code' especificado
+        return Estudiante.objects.get(code=code)
 
 class EstudianteDetailView(DetailView):
     model = Estudiante
