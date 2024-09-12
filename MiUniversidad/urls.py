@@ -29,8 +29,11 @@ urlpatterns = [
     path('estudiantes/<uuid:pk>/update/', views.EstudianteUpdateView.as_view(), name='actualizar_estudiante'),
     path('estudiantes/<uuid:code>/delete/', views.EstudianteDeleteView.as_view(), name='estudiante_delete'),
     path('buscarEstudiantes/',views.buscar_estudiantes, name='buscar_estudiantes'),
-    path('detalleEstudiante/<uuid:code>/',views.detalle_estudiante, name='detalle_estudiante'),
+    path('carrera/',views.CarreraListView.as_view(), name='carrera_list'),
+    path('carrera/create/',views.CarreraCreateView.as_view(), name='carrera_create'),
+    path('carrera/<uuid:code>/',views.CarreraDetailView.as_view(), name='carrera_detail'),
+    path('carrera/<uuid:pk>/update/', views.CarreraUpdateView.as_view(), name='actualizar_carrera'),
+    path('carrera/<uuid:code>/delete/', views.CarreraDeleteView.as_view(), name='carrera_delete'),
     path('buscarCarreras/',views.buscar_carreras, name='buscar_carreras'),
-    path('detalleCarrera/<uuid:code>/',views.detalle_carrera, name='detalle_carrera'),
     path('about/',views.about_me, name='aboutMe'),
 ]

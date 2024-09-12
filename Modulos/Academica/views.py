@@ -53,13 +53,7 @@ def buscar_estudiantes(request):
                 Q(nombre__icontains=criterio) | Q(apellido__icontains=criterio)
             )
 
-    return render(request, 'buscar_estudiantes.html', {'form': form, 'resultados': resultados})
-
-
-def detalle_estudiante(request, code):
-    estudiante = get_object_or_404(Estudiante, code=code)
-    return render(request, 'detalle_estudiante.html', {'estudiante': estudiante})
-
+    return render(request, 'estudiantes/buscar_estudiantes.html', {'form': form, 'resultados': resultados})
 
 def buscar_carreras(request):
     form = BusquedaCarreraForm()
@@ -73,11 +67,7 @@ def buscar_carreras(request):
                 Q(nombre__icontains=criterio) | Q(duracion__icontains=criterio)
             )
 
-    return render(request, 'buscar_carreras.html', {'form': form, 'resultados': resultados})
-
-def detalle_carrera(request, code):
-    carrera = get_object_or_404(Carrera, code=code)
-    return render(request, 'detalle_carrera.html', {'carrera': carrera})
+    return render(request, 'carreras/buscar_carreras.html', {'form': form, 'resultados': resultados})
 
 def index(request):
     return render(request, 'index.html')
@@ -87,7 +77,7 @@ def about_me(request):
 
 class EstudianteCreateView(CreateView):
     model = Estudiante
-    fields = ['dni', 'nombre', 'apellido', 'fechaNacimiento', 'sexo', 'carrera', 'vigencia']
+    fields = ['dni', 'nombre', 'apellido', 'fechaNacimiento', 'email','sexo', 'carrera', 'vigencia']
     template_name = 'estudiantes/estudiante_form.html'
     success_url = reverse_lazy('estudiante_list')
 
@@ -98,7 +88,7 @@ class EstudianteListView(ListView):
 
 class EstudianteUpdateView(UpdateView):
     model = Estudiante
-    fields = ['nombre', 'apellido', 'fechaNacimiento','sexo', 'carrera', 'vigencia']
+    fields = ['nombre', 'apellido', 'fechaNacimiento','sexo', 'email','carrera', 'vigencia']
     template_name = 'estudiantes/estudiante_form.html'
     success_url = '/estudiantes/'
 
@@ -130,3 +120,48 @@ class EstudianteDetailView(DetailView):
         code = self.kwargs.get('code')
         return get_object_or_404(Estudiante, code=code) 
 
+class CarreraCreateView(CreateView):
+    model = Carrera
+    fields = ['codigo', 'nombre', 'duracion']
+    template_name = 'carreras/carrera_form.html'
+    success_url = reverse_lazy('carrera_list')
+
+class CarreraListView(ListView):
+    model = Carrera
+    fields = ['nombre', 'duracion']
+    template_name = 'carreras/carrera_list.html'
+    context_object_name = 'carreras'
+
+class CarreraUpdateView(UpdateView):
+    model = Carrera
+    fields = ['codigo', 'nombre', 'duracion']
+    template_name = 'carreras/carrera_form.html'
+    success_url = '/carrera/'
+
+    def get_object(self, queryset=None):
+        # Obtener el UUID del parámetro 'pk'
+        code = self.kwargs.get('pk')
+        try:
+            return Carrera.objects.get(code=code)
+        except Carrera.DoesNotExist:
+            raise Http404("carreras no encontrada")
+
+class CarreraDeleteView(DeleteView):
+    model = Carrera
+    template_name = 'carreras/carrera_confirm_delete.html'
+    success_url = reverse_lazy('carrera_list')
+
+    def get_object(self, queryset=None):
+        # Obtén el 'code' de los argumentos de la URL
+        code = self.kwargs.get('code')
+        # Busca el estudiante con el 'code' especificado
+        return Carrera.objects.get(code=code)
+
+class CarreraDetailView(DetailView):
+    model = Carrera
+    template_name = 'carreras/carrera_detail.html'
+    context_object_name = 'carrera'
+    
+    def get_object(self):
+        code = self.kwargs.get('code')
+        return get_object_or_404(Carrera, code=code) 

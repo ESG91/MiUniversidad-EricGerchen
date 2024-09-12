@@ -39,7 +39,7 @@
                         <ul class="list-group">
                             {% for carrera in resultados %}
                                 <li class="list-group-item">
-                                    <a href="{% url 'detalle_carrera' code=carrera.code %}" class="text-decoration-none text-primary">
+                                    <a href="{% url 'carrera_detail' code=carrera.code %}" class="text-decoration-none text-primary">
                                         {{ carrera.nombre }}
                                     </a>
                                 </li>

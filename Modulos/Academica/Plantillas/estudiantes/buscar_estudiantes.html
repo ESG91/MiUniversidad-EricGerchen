@@ -39,7 +39,7 @@
                         <ul class="list-group">
                             {% for estudiante in resultados %}
                                 <li class="list-group-item">
-                                    <a href="{% url 'detalle_estudiante' code=estudiante.code %}" class="text-decoration-none text-primary">
+                                    <a href="{% url 'estudiante_detail' code=estudiante.code %}" class="text-decoration-none text-primary">
                                         {{ estudiante.nombre }} {{ estudiante.apellido }}
                                     </a>
                                 </li>

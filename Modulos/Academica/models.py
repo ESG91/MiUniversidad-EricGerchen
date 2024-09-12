@@ -21,6 +21,7 @@ class Estudiante(models.Model):
     nombre = models.CharField(max_length=35)
     apellido = models.CharField(max_length=35)
     fechaNacimiento = models.DateField()
+    email = models.EmailField(max_length=254, null=True, blank=True)
     sexos = [
         ('F', 'Femenino'),
         ('M', 'Masculino')
