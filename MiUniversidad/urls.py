@@ -17,10 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Modulos.Academica import views
+from django.contrib.auth.views import LoginView,LogoutView
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index, name='index'),  # Ruta para la página de inicio
+    # URL para la página de inicio de sesión
+    path('', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),    path('index/', views.index, name='index'),  # URL del Index
     path('formularioContacto/',views.formularioContacto,name='formularioContacto'),
     path('contactar/',views.contactar),
     path('estudiantes/',views.EstudianteListView.as_view(), name='estudiante_list'),
@@ -36,4 +40,6 @@ urlpatterns = [
     path('carrera/<uuid:code>/delete/', views.CarreraDeleteView.as_view(), name='carrera_delete'),
     path('buscarCarreras/',views.buscar_carreras, name='buscar_carreras'),
     path('about/',views.about_me, name='aboutMe'),
+    path('registro/', views.registro, name='registro'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]

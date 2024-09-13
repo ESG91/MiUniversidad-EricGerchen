@@ -128,3 +128,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "ERICGERCHEN@GMAIL.COM"
 EMAIL_HOST_PASSWORD = "tjgg lxuv idum xtph"
+LOGIN_REDIRECT_URL = '/index/'  # Redirige al Index después de iniciar sesión
+LOGOUT_REDIRECT_URL = 'login'  # Redirige al usuario a la página de login después de cerrar sesión
+

@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.conf import settings
 from django.core.mail import send_mail
 from .models import Estudiante,Carrera
-from .forms import BusquedaEstudianteForm,BusquedaCarreraForm,ContactoForm
+from .forms import BusquedaEstudianteForm,BusquedaCarreraForm,ContactoForm,RegistroForm
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+from django.contrib.auth import login
+
 
 # Create your views here.
 
@@ -165,3 +167,15 @@ class CarreraDetailView(DetailView):
     def get_object(self):
         code = self.kwargs.get('code')
         return get_object_or_404(Carrera, code=code) 
+    
+def registro(request):
+    if request.method == 'POST':
+        form = RegistroForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('login')  
+    else:
+        form = RegistroForm()
+    return render(request, 'registration/registro.html', {'form': form})
+

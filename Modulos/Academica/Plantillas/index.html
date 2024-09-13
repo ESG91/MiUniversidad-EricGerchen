@@ -19,6 +19,16 @@
             align-items: center;
             height: 100vh;
         }
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+        .btn-logout {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
         .menu-container {
             background-color: #fff;
             padding: 40px;
@@ -46,26 +56,41 @@
         .menu-container a i {
             margin-right: 10px;
         }
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
-    <div class="menu-container">
-        <h1><i class="fas fa-home"></i> Menú Principal</h1>
-        <a href="{% url 'admin:index' %}">
-            <i class="fas fa-cog"></i> Administración
-        </a>
-        <a href="{% url 'formularioContacto' %}">
-            <i class="fas fa-envelope"></i> Formulario de Contacto
-        </a>
-        <a href="{% url 'estudiante_list' %}">
-            <i class="fas fa-user"></i> Lista de Estudiantes
-        </a>
-        <a href="{% url 'carrera_list' %}">
-            <i class="fas fa-book"></i> Lista de Carreras
-        </a>
-        <a href="{% url 'aboutMe' %}">
-            <i class="fas fa-user"></i> About Me
-        </a>
+    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-logout">
+            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </button>
+    </form>
+    <div class="container">
+        <div class="menu-container">
+            <h1><i class="fas fa-home"></i> Menú Principal</h1>
+            <a href="{% url 'admin:index' %}">
+                <i class="fas fa-cog"></i> Administración
+            </a>
+            <a href="{% url 'formularioContacto' %}">
+                <i class="fas fa-envelope"></i> Formulario de Contacto
+            </a>
+            <a href="{% url 'estudiante_list' %}">
+                <i class="fas fa-user"></i> Lista de Estudiantes
+            </a>
+            <a href="{% url 'carrera_list' %}">
+                <i class="fas fa-book"></i> Lista de Carreras
+            </a>
+            <a href="{% url 'aboutMe' %}">
+                <i class="fas fa-user"></i> About Me
+            </a>
+        </div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->
