@@ -24,7 +24,8 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # URL para la página de inicio de sesión
-    path('', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),    path('index/', views.index, name='index'),  # URL del Index
+    path('', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),    
+    path('index/', views.index, name='index'),  # URL del Index
     path('formularioContacto/',views.formularioContacto,name='formularioContacto'),
     path('contactar/',views.contactar),
     path('estudiantes/',views.EstudianteListView.as_view(), name='estudiante_list'),
